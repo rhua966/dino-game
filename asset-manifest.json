@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.js": "/react-dino/static/js/main.ec655cdf.chunk.js",
-    "main.js.map": "/react-dino/static/js/main.ec655cdf.chunk.js.map",
-    "runtime-main.js": "/react-dino/static/js/runtime-main.9f1c730b.js",
-    "runtime-main.js.map": "/react-dino/static/js/runtime-main.9f1c730b.js.map",
-    "static/js/2.8fb7c44b.chunk.js": "/react-dino/static/js/2.8fb7c44b.chunk.js",
-    "static/js/2.8fb7c44b.chunk.js.map": "/react-dino/static/js/2.8fb7c44b.chunk.js.map",
-    "index.html": "/react-dino/index.html",
-    "static/js/2.8fb7c44b.chunk.js.LICENSE.txt": "/react-dino/static/js/2.8fb7c44b.chunk.js.LICENSE.txt",
-    "static/media/dinosaur.196c6537.png": "/react-dino/static/media/dinosaur.196c6537.png",
-    "static/media/dinosaur_die.a3becd12.png": "/react-dino/static/media/dinosaur_die.a3becd12.png",
-    "static/media/dinosaur_left.38664ae7.png": "/react-dino/static/media/dinosaur_left.38664ae7.png",
-    "static/media/dinosaur_right.536513e6.png": "/react-dino/static/media/dinosaur_right.536513e6.png"
+    "main.js": "/dino-game/static/js/main.dd8ddee2.chunk.js",
+    "main.js.map": "/dino-game/static/js/main.dd8ddee2.chunk.js.map",
+    "runtime-main.js": "/dino-game/static/js/runtime-main.99790812.js",
+    "runtime-main.js.map": "/dino-game/static/js/runtime-main.99790812.js.map",
+    "static/js/2.984c0d9b.chunk.js": "/dino-game/static/js/2.984c0d9b.chunk.js",
+    "static/js/2.984c0d9b.chunk.js.map": "/dino-game/static/js/2.984c0d9b.chunk.js.map",
+    "index.html": "/dino-game/index.html",
+    "static/js/2.984c0d9b.chunk.js.LICENSE.txt": "/dino-game/static/js/2.984c0d9b.chunk.js.LICENSE.txt",
+    "static/media/dinosaur.196c6537.png": "/dino-game/static/media/dinosaur.196c6537.png",
+    "static/media/dinosaur_die.a3becd12.png": "/dino-game/static/media/dinosaur_die.a3becd12.png",
+    "static/media/dinosaur_left.38664ae7.png": "/dino-game/static/media/dinosaur_left.38664ae7.png",
+    "static/media/dinosaur_right.536513e6.png": "/dino-game/static/media/dinosaur_right.536513e6.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.9f1c730b.js",
-    "static/js/2.8fb7c44b.chunk.js",
-    "static/js/main.ec655cdf.chunk.js"
+    "static/js/runtime-main.99790812.js",
+    "static/js/2.984c0d9b.chunk.js",
+    "static/js/main.dd8ddee2.chunk.js"
   ]
 }
