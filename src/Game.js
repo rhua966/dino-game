@@ -71,7 +71,10 @@ export default class Game extends React.Component {
         console.log("Highscore: " + this.highScore);
         this.jumpHeight = 0;
         this.jumpDelta = 0;
+        this.obstaclesBase = 1;
         this.obstacles = this.__obstaclesGenerate();
+        console.log(this.obstacles);
+        
         this.currentDistance = 0;
         this.playerStatus = 0;
     }
@@ -161,8 +164,8 @@ export default class Game extends React.Component {
             this.jumpDelta = 0;
         } else if (this.jumpHeight < JUMP_MAX_HEIGHT && this.jumpDelta > 0) {
             this.jumpDelta = (this.jumpHeight ** 2) * 0.001033 - this.jumpHeight * 0.137 + 5;
-        } else if (this.jumpHeight < JUMP_MAX_HEIGHT && this.jumpDelta < 0) {
-            this.jumpDelta = (this.jumpDelta ** 2) * 0.00023 - this.jumpHeight * 0.03 - 4;
+        // } else if (this.jumpHeight < JUMP_MAX_HEIGHT && this.jumpDelta < 0) {
+        //     this.jumpDelta = (this.jumpDelta ** 2) * 0.00023 - this.jumpHeight * 0.03 - 4;
         } else if (this.jumpHeight >= JUMP_MAX_HEIGHT) {
             this.jumpDelta = -JUMP_DELTA / 2.7;
         }
@@ -195,13 +198,15 @@ export default class Game extends React.Component {
         // Draw obstacles
         let pop = 0;
         for (let i = 0; i < this.obstacles.length; ++i) {
+            console.log(pop);
             if (this.currentDistance >= this.obstacles[i].distance) {
                 let offset = width - (this.currentDistance - this.obstacles[i].distance + groundSpeed);
                 if (offset > 0) {
-                    ctx.drawImage(options.obstacleImage, offset, 84);
+                    ctx.drawImage(this.options.obstacleImage, offset, 84);
                 } else {
                     ++pop;
                 }
+                
             } else {
                 break;
             }
@@ -228,7 +233,7 @@ export default class Game extends React.Component {
 
     __obstaclesGenerate() {
         let result = [];
-        for (let i = 0; i < 10; i++) {
+        for (let i = 0; i < 10; ++i) {
             let random = Math.floor(Math.random() * 100) % 60;
             random = (Math.random() * 10 % 2 === 0 ? 1 : -1) * random;
             result.push({
