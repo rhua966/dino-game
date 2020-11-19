@@ -68,6 +68,7 @@ export default class Game extends React.Component {
         this.timer = null;
         this.score = 0;
         this.highScore = window.localStorage ? window.localStorage['highScore'] || 0 : 0;
+        console.log("Highscore: " + this.highScore);
         this.jumpHeight = 0;
         this.jumpDelta = 0;
         this.obstacles = this.__obstaclesGenerate();
@@ -177,7 +178,8 @@ export default class Game extends React.Component {
             this.score += 0.5;
             if (this.score > this.highScore) {
                 this.highScore = this.score;
-                window.localStorageal['highScore'] = this.score;
+                console.log("Score: " + this.score + ", New High: " + this.highScore);
+                window.localStorage['highScore'] = this.highScore;
             }
             this.currentDistance += groundSpeed;
             if (this.score % 4 === 0) {
