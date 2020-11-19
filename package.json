@@ -1,7 +1,7 @@
 {
-  "name": "react-dino",
+  "name": "dino-game",
   "version": "0.1.0",
-  "homepage": "http://rhua966.github.io/react-dino",
+  "homepage": "http://rhua966.github.io/dino-game",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
