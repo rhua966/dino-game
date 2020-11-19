@@ -100,9 +100,24 @@ export default class Game extends React.Component {
             }
         };
 
+        const onPPress = () => {
+            switch (this.status) {
+                case STATUS.PAUSE:
+                    this.goOn();
+                    break;
+                case STATUS.START:
+                    this.pause();
+                    break;
+                default:
+                    break;
+            }
+        }
+
         window.onkeypress = (e) => {
             if (e.key === ' ') {
                 onSpacePress();
+            } else if (e.key === 'p') {
+                onPPress();
             }
         }
 
