@@ -1,22 +1,8 @@
 import React from 'react';
 
-import skyPng from './img/cloud.png';
-import groundPng from './img/ground.png';
-import dinoPng from './img/dinosaur.png';
-import dinoLeftPng from './img/dinosaur_left.png';
-import dinoRightPng from './img/dinosaur_right.png';
-import dinoDiePng from './img/dinosaur_die.png';
-import obstaclePng from './img/obstacle.png';
-
-const STATUS = {
-    STOP: 'STOP',
-    START: 'START',
-    PAUSE: 'PAUSE',
-    OVER: 'OVER'
-}
-
-const JUMP_DELTA = 5;
-const JUMP_MAX_HEIGHT = 53;
+import * as DEFAULT from './constants';
+import { STATUS } from './constants';
+import {skyImage, groundImage, dinoImage, dinoLeftImage, dinoRightImage, dinoDieImage, obstacleImage } from './img/img';
 
 export default class Game extends React.Component {
     constructor(props) {
@@ -31,36 +17,20 @@ export default class Game extends React.Component {
         };
 
         // Image files
-        let skyImage = new Image();
-        let groundImage = new Image();
-        let dinoImage = new Image();
-        let dinoLeftImage = new Image();
-        let dinoRightImage = new Image();
-        let dinoDieImage = new Image();
-        let obstacleImage = new Image();
-
         skyImage.onload = onImageLoaded;
         groundImage.onload = onImageLoaded;
         dinoImage.onload = onImageLoaded;
 
-        skyImage.src = skyPng;
-        groundImage.src = groundPng;
-        dinoImage.src = dinoPng; 
-        dinoLeftImage.src = dinoLeftPng;
-        dinoRightImage.src = dinoRightPng;
-        dinoDieImage.src = dinoDiePng;
-        obstacleImage.src = obstaclePng;
-
         this.options = {
-            fps: 60,
-            skySpeed: 40,
-            groundSpeed: 100,
+            fps: DEFAULT.FPS,
+            skySpeed: DEFAULT.SKY_SPEED,
+            groundSpeed: DEFAULT.GROUND_SPEED,
             skyImage: skyImage,
             groundImage: groundImage,
             dinoImage: [dinoImage, dinoLeftImage, dinoRightImage, dinoDieImage],
             obstacleImage: obstacleImage,
-            skyOffset: 0,
-            groundOffset: 0,
+            skyOffset: DEFAULT.SKY_OFFSET,
+            groundOffset: DEFAULT.GROUND_OFFSET,
             ...this.props.options
         };
 
@@ -68,12 +38,10 @@ export default class Game extends React.Component {
         this.timer = null;
         this.score = 0;
         this.highScore = window.localStorage ? window.localStorage['highScore'] || 0 : 0;
-        console.log("Highscore: " + this.highScore);
         this.jumpHeight = 0;
         this.jumpDelta = 0;
         this.obstaclesBase = 1;
         this.obstacles = this.__obstaclesGenerate();
-        console.log(this.obstacles);
         
         this.currentDistance = 0;
         this.playerStatus = 0;
@@ -177,12 +145,12 @@ export default class Game extends React.Component {
         if (this.jumpHeight <= 1) {
             this.jumpHeight = 0;
             this.jumpDelta = 0;
-        } else if (this.jumpHeight < JUMP_MAX_HEIGHT && this.jumpDelta > 0) {
+        } else if (this.jumpHeight < DEFAULT.JUMP_MAX_HEIGHT&& this.jumpDelta > 0) {
             this.jumpDelta = (this.jumpHeight ** 2) * 0.001033 - this.jumpHeight * 0.137 + 5;
         // } else if (this.jumpHeight < JUMP_MAX_HEIGHT && this.jumpDelta < 0) {
         //     this.jumpDelta = (this.jumpDelta ** 2) * 0.00023 - this.jumpHeight * 0.03 - 4;
-        } else if (this.jumpHeight >= JUMP_MAX_HEIGHT) {
-            this.jumpDelta = -JUMP_DELTA / 2.7;
+        } else if (this.jumpHeight >= DEFAULT.JUMP_MAX_HEIGHT) {
+            this.jumpDelta = - DEFAULT.JUMP_DELTA / 2.7;
         }
 
         // Draw score text
@@ -327,8 +295,8 @@ export default class Game extends React.Component {
             return;
         }
 
-        this.jumpDelta = JUMP_DELTA;
-        this.jumpHeight = JUMP_DELTA;
+        this.jumpDelta = DEFAULT.JUMP_DELTA;
+        this.jumpHeight = DEFAULT.JUMP_DELTA;
     };
 
     render() {
