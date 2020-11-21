@@ -2,7 +2,11 @@ import React from 'react';
 
 import * as DEFAULT from './constants';
 import { STATUS } from './constants';
-import {skyImage, groundImage, dinoImage, dinoLeftImage, dinoRightImage, dinoDieImage, obstacleImage } from './img/img';
+import {
+    replayImage, gameOverImage, skyImage, groundImage,
+    dinoImage, dinoLeftImage, dinoRightImage, dinoDieImage, obstacleImage,
+    dinoCrouchLeftImage, dinoCrouchRightImage, flyingDinoUpImage, flyingDinoDownImage
+} from './img/img';
 
 export default class Game extends React.Component {
     constructor(props) {
@@ -27,7 +31,15 @@ export default class Game extends React.Component {
             groundSpeed: DEFAULT.GROUND_SPEED,
             skyImage: skyImage,
             groundImage: groundImage,
-            dinoImage: [dinoImage, dinoLeftImage, dinoRightImage, dinoDieImage],
+            // dinoImage: [dinoImage, dinoLeftImage, dinoRightImage, dinoDieImage],
+            dinoImage: {
+                0: dinoImage,
+                1: dinoLeftImage,
+                2: dinoRightImage,
+                3: dinoDieImage,
+                4: dinoCrouchLeftImage,
+                5: dinoCrouchRightImage
+            },
             obstacleImage: obstacleImage,
             skyOffset: DEFAULT.SKY_OFFSET,
             groundOffset: DEFAULT.GROUND_OFFSET,
@@ -45,6 +57,7 @@ export default class Game extends React.Component {
         
         this.currentDistance = 0;
         this.playerStatus = 0;
+        this.playerCrouch = false;
     }
 
     componentDidMount() {
@@ -52,7 +65,7 @@ export default class Game extends React.Component {
             this.canvas.width = 680;
         }
 
-        const onSpacePress = () => {
+        const onJump = () => {
             switch (this.status) {
                 case STATUS.STOP:
                     this.start();
@@ -68,7 +81,21 @@ export default class Game extends React.Component {
             }
         };
 
-        const onPPress = () => {
+        const onCrouch = (e) => {
+            if (this.status === STATUS.START) {
+                if (e === 'down') {
+                    this.playerStatus = this.playerStatus % 2 + 4;
+                    this.playerCrouch = true;
+                } else if (e === 'up') {
+                    this.playerStatus = 0;
+                    this.playerCrouch = false;
+                }
+            } else {
+                return;
+            }
+        }
+
+        const onPause = () => {
             switch (this.status) {
                 case STATUS.PAUSE:
                     this.goOn();
@@ -82,14 +109,26 @@ export default class Game extends React.Component {
         }
 
         window.onkeypress = (e) => {
-            if (e.key === ' ') {
-                onSpacePress();
-            } else if (e.key === 'p') {
-                onPPress();
+            if (e.code === 'Space' || e.code === 'ArrowUp' || e.code === 'KeyW') {
+                onJump();
+            } else if (e.code === 'KeyP') {
+                onPause();
+            } else if (e.code === 'ArrowDown' || e.code === 'KeyS') {
+                onCrouch('down');
+            }
+        }
+        window.onkeydown = (e) => {
+            if (e.code === 'ArrowDown' || e.code === 'KeyS') {
+                onCrouch('down');
+            }
+        }
+        window.onkeyup = (e) => {
+            if (e.code === 'ArrowDown' || e.code === 'KeyS') {
+                onCrouch('up');
             }
         }
 
-        this.canvas.parentNode.onclick = onSpacePress;
+        this.canvas.parentNode.onclick = onJump;
 
         window.onblur = this.pause;
         window.onfocus = this.goOn;
@@ -169,7 +208,11 @@ export default class Game extends React.Component {
             }
             this.currentDistance += groundSpeed;
             if (this.score % 4 === 0) {
-                this.playerStatus = (this.playerStatus + 1) % 3;
+                if (!this.playerCrouch) {
+                    this.playerStatus = (this.playerStatus + 1) % 3;
+                } else {
+                    this.playerStatus = (this.playerStatus + 1) % 2 + 4;
+                }
             }
         }
 
@@ -208,6 +251,8 @@ export default class Game extends React.Component {
         if (90 - obstacleWidth < firstOffset &&
             firstOffset < 60 + dinoWidth &&
             64 - this.jumpHeight + dinoHeight > 84) {
+            ctx.drawImage(gameOverImage, width / 2 - 70, 40);
+            ctx.drawImage(replayImage, width / 2 + 10, 55);
             this.stop();
         }
 
