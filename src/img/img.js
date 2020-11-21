@@ -1,4 +1,5 @@
 import replayPng from './replay.png';
+import gameOverPng from './game_over.png';
 import skyPng from './cloud.png';
 import groundPng from './ground.png';
 import dinoPng from './dinosaur.png';
@@ -12,6 +13,7 @@ import flyingDinoUpPng from './flying_dinosaur_up.png';
 import flyingDinoDownPng from './flying_dinosaur_down.png';
 
 let replayImage = new Image();
+let gameOverImage = new Image();
 let skyImage = new Image();
 let groundImage = new Image();
 let dinoImage = new Image();
@@ -25,6 +27,7 @@ let flyingDinoUpImage = new Image();
 let flyingDinoDownImage = new Image();
 
 replayImage.src = replayPng;
+gameOverImage.src = gameOverPng;
 skyImage.src = skyPng;
 groundImage.src = groundPng;
 dinoImage.src = dinoPng; 
@@ -38,7 +41,7 @@ flyingDinoUpImage.src = flyingDinoUpPng;
 flyingDinoDownImage.src = flyingDinoDownPng;
 
 export {
-    replayImage, skyImage, groundImage,
+    replayImage, gameOverImage, skyImage, groundImage,
     dinoImage, dinoLeftImage, dinoRightImage, dinoDieImage, obstacleImage,
     dinoCrouchLeftImage, dinoCrouchRightImage, flyingDinoUpImage, flyingDinoDownImage
 };
