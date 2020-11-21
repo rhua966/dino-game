@@ -328,6 +328,8 @@ export default class Game extends React.Component {
         this.__clearTimer();
         this.__draw();
         this.__clear();
+        this.playerStatus = 0;
+        this.playerCrouch = false;
     };
 
     restart = () => {
