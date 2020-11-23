@@ -7,7 +7,7 @@ export const STATUS = {
 
 export const FPS = 60;
 export const SKY_SPEED = 40;
-export const GROUND_SPEED = 100;
+export const GROUND_SPEED = 200;
 export const SKY_OFFSET = 0;
 export const GROUND_OFFSET = 0;
 

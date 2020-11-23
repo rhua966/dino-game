@@ -113,8 +113,6 @@ export default class Game extends React.Component {
                 onJump();
             } else if (e.code === 'KeyP') {
                 onPause();
-            } else if (e.code === 'ArrowDown' || e.code === 'KeyS') {
-                onCrouch('down');
             }
         }
         window.onkeydown = (e) => {
@@ -184,12 +182,12 @@ export default class Game extends React.Component {
         if (this.jumpHeight <= 1) {
             this.jumpHeight = 0;
             this.jumpDelta = 0;
-        } else if (this.jumpHeight < DEFAULT.JUMP_MAX_HEIGHT&& this.jumpDelta > 0) {
+        } else if (this.jumpHeight < DEFAULT.JUMP_MAX_HEIGHT && this.jumpDelta > 0) {
             this.jumpDelta = (this.jumpHeight ** 2) * 0.001033 - this.jumpHeight * 0.137 + 5;
-        // } else if (this.jumpHeight < JUMP_MAX_HEIGHT && this.jumpDelta < 0) {
+        // } else if (this.jumpHeight < DEFAULT.JUMP_MAX_HEIGHT && this.jumpDelta < 0) {
         //     this.jumpDelta = (this.jumpDelta ** 2) * 0.00023 - this.jumpHeight * 0.03 - 4;
         } else if (this.jumpHeight >= DEFAULT.JUMP_MAX_HEIGHT) {
-            this.jumpDelta = - DEFAULT.JUMP_DELTA / 2.7;
+            this.jumpDelta = - DEFAULT.JUMP_DELTA / 2;
         }
 
         // Draw score text
@@ -203,7 +201,7 @@ export default class Game extends React.Component {
             this.score += 0.5;
             if (this.score > this.highScore) {
                 this.highScore = this.score;
-                console.log("Score: " + this.score + ", New High: " + this.highScore);
+                // console.log("Score: " + this.score + ", New High: " + this.highScore);
                 window.localStorage['highScore'] = this.highScore;
             }
             this.currentDistance += groundSpeed;
@@ -213,6 +211,8 @@ export default class Game extends React.Component {
                 } else {
                     this.playerStatus = (this.playerStatus + 1) % 2 + 4;
                 }
+                // this.options.groundSpeed = Math.min((this.score / 10) + DEFAULT.GROUND_SPEED, 600);
+                // console.log(this.groundSpeed);
             }
         }
 
@@ -228,7 +228,7 @@ export default class Game extends React.Component {
             if (this.currentDistance >= this.obstacles[i].distance) {
                 let offset = width - (this.currentDistance - this.obstacles[i].distance + groundSpeed);
                 if (offset > 0) {
-                    ctx.drawImage(this.options.obstacleImage, offset, 84);
+                    ctx.drawImage(this.options.obstacleImage, offset, 74);
                 } else {
                     ++pop;
                 }
