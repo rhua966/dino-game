@@ -6,7 +6,7 @@ import dinoPng from './dinosaur.png';
 import dinoLeftPng from './dinosaur_left.png';
 import dinoRightPng from './dinosaur_right.png';
 import dinoDiePng from './dinosaur_die.png';
-import obstaclePng from './obstacle.png';
+import obstaclePng from './cactus_1.png';
 import dinoCrouchLeftPng from './dinosaur_crouch_left.png';
 import dinoCrouchRightPng from './dinosaur_crouch_right.png';
 import flyingDinoUpPng from './flying_dinosaur_up.png';
