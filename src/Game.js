@@ -2,6 +2,7 @@ import React from 'react';
 import { useEffect } from 'react'
 import Canvas from './Canvas';
 import { useState } from 'react';
+import './index.css';
 
 
 
