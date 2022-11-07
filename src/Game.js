@@ -24,7 +24,6 @@ useEffect(() => {
   }
 }, []);
 
-/*
 
 let options = {
   fps: 200,
@@ -40,7 +39,7 @@ let options = {
   fillStyle: "#595959",
   tolerance: 2
 };
-*/
+
 
 return (
   < Canvas width={widthOld} height={heightOld} defaultOptions={options} />
