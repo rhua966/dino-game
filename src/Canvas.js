@@ -23,7 +23,8 @@ const Canvas = ({width, height, defaultOptions}) => {
         font: defaultOptions.font,
         textAlign: defaultOptions.textAlign,
         fillStyle: defaultOptions.fillStyle, 
-        tolerance: defaultOptions.tolerance
+        tolerance: defaultOptions.tolerance,
+        autoStart: defaultOptions.autoStart
     };
 
     // images for the game
@@ -100,10 +101,12 @@ const Canvas = ({width, height, defaultOptions}) => {
             canvasRef.current.focus(); 
             draw() //render();
 
-            setTimeout(() => {
-                // start game after 1 second
-                onJump();
-            }, 1000);
+            if (options.autoStart) {
+                setTimeout(() => {
+                    // start game after 1 second
+                    onJump();
+                }, 1000);
+            }
     
             window.onblur = pause;
             window.onfocus = goOn;
